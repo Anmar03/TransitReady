@@ -2,6 +2,9 @@
 .gradle/
 build/
 
+# Csv Files
+app/src/main/assets/*.csv
+
 # Local configuration file (sdk path, etc)
 local.properties
 
