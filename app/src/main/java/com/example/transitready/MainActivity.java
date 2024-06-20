@@ -4,17 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 
 
 import com.example.transitready.databinding.ActivityMainBinding;
 
-import java.util.ArrayList;
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements BusInfoAdapter.AdapterCallback, MapFragment.MarkerClickCallback {
+    /////// START OF REFERENCE
+    // https://youtu.be/jOFLmKMOcK0?si=4sBXIpiYBgC2qzmP
     ActivityMainBinding binding;
 
     @Override
@@ -30,14 +28,22 @@ public class MainActivity extends AppCompatActivity {
                 replaceFragment(new HomeFragment());
             } else if (item.getItemId() == R.id.search) {
                 replaceFragment(new SearchFragment());
-            } else if (item.getItemId() == R.id.settings) {
-                replaceFragment(new SettingsFragment());
+            } else if (item.getItemId() == R.id.map) {
+                replaceFragment(new MapFragment());
             }
 
             return true;
         });
 
+
     }
+    @Override
+    public void onFragmentChange(Fragment fragment) {
+        replaceFragment(fragment);
+    }
+
+    @Override
+    public void onMarkerClick(Fragment fragment) { replaceFragment(fragment); }
 
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -46,3 +52,4 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 }
+/////// END OF REFERENCE
